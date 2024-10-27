@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SweetBoxApp.Views.SellerDetailsPage"
+             xmlns:viewmodel="clr-namespace:SweetBoxApp.ViewModels"
+             FlowDirection="RightToLeft"
+             Title="פרטי העסק שלי ">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="15">
+
+            <!-- שם העסק -->
+            <Label FontSize="Large" FontAttributes="Bold" Text="שם העסק" />
+            <Label Text="{Binding BusinessName}"
+                FontSize="Medium"/>
+           
+
+            <!-- כתובת העסק -->
+            <Label FontSize="Large" FontAttributes="Bold" Text="כתובת העסק" />
+            <Label Text="{Binding BusinessAddress}"
+                FontSize="Medium"/> 
+
+            <!-- טלפון העסק -->
+            <Label FontSize="Large" FontAttributes="Bold" Text="טלפון העסק" />
+            <Label Text="{Binding BusinessPhone}"
+                FontSize="Medium" />
+                  
+
+            <!-- תיאור העסק -->
+            <Label FontSize="Large" FontAttributes="Bold" Text="תיאור העסק" />
+            <Label Text="{Binding Description}"
+                FontSize="Medium"/> 
+
+            <!-- תמונת פרופיל -->
+            <Label FontSize="Large" FontAttributes="Bold" Text="תמונת פרופיל" />
+            <Image Source="{Binding ProfilePicture}" WidthRequest="100" HeightRequest="100" />
+              
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

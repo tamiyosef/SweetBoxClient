@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SweetBoxApp.Views.BusinessesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:SweetBoxApp.Behaviors"
+    Title="BusinessesPage">
+
+    <VerticalStackLayout Padding="20">
+        <Label
+            FontSize="Large"
+            HorizontalOptions="Center"
+            Text="Businesses" />
+
+        <CollectionView
+            ItemsSource="{Binding SellersList}"
+            SelectedItem="{Binding SelectedSeller, Mode=TwoWay}"
+            SelectionMode="Single">
+
+            <!--  קישור לאירוע SelectionChanged דרך Command ב-ViewModel  -->
+            <CollectionView.Behaviors>
+                <behaviors:EventToCommandBehavior
+                    Command="{Binding SellerSelectedCommand}"
+                    CommandParameter="{Binding SelectedSeller}"
+                    EventName="SelectionChanged" />
+            </CollectionView.Behaviors>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout
+                        Padding="10"
+                        Orientation="Horizontal"
+                        Spacing="10">
+                        <!--  הצגת תמונת העסק  -->
+                        <Image
+                            Aspect="AspectFill"
+                            HeightRequest="50"
+                            Source="{Binding ProfilePicture}"
+                            WidthRequest="50" />
+
+                        <!--  פרטי העסק  -->
+                        <StackLayout>
+                            <Label FontSize="Medium" Text="{Binding BusinessName}" />
+                            <Label
+                                FontSize="Small"
+                                Text="{Binding BusinessAddress}"
+                                TextColor="Gray" />
+                            <Label
+                                FontSize="Small"
+                                Text="{Binding BusinessPhone}"
+                                TextColor="Gray" />
+                            <Label FontSize="Small" Text="{Binding Description}" />
+                        </StackLayout>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+    </VerticalStackLayout>
+
+
+</ContentPage>
