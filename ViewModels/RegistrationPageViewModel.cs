@@ -237,10 +237,7 @@ namespace SweetBoxApp.ViewModels
                 // בדיקת סוג המשתמש
                 if (User_Type == "2") // אם המשתמש הוא מוכר
                 {
-                    // יצירת עמוד SellerRegistrationPage והעברת ה-sellerId
-                    //var sellerRegistrationPage = serviceProvider.GetRequiredService<SellerRegistrationPage>();
-                    //var sellerRegistrationViewModel = new SellerRegistrationPageViewModel(api_service, serviceProvider, (int)res);
-                    //sellerRegistrationPage.BindingContext = sellerRegistrationViewModel;
+
                     // קבלת ה-SellerRegistrationPage וה-ViewModel דרך DI
                     var sellerRegistrationPage = serviceProvider.GetRequiredService<SellerRegistrationPage>();
                     var sellerRegistrationViewModel = serviceProvider.GetRequiredService<SellerRegistrationPageViewModel>();

@@ -13,6 +13,7 @@ public class BusinessesPageViewModel : ViewModelBase
 
     private SweetBoxWebApi _apiService;
     private Sellers selectedSeller;
+    private readonly IServiceProvider _serviceProvider;
     public bool IsSellerSelected => SelectedSeller != null;
 
     public ObservableCollection<Sellers> SellersList { get; set; }
@@ -34,7 +35,7 @@ public class BusinessesPageViewModel : ViewModelBase
     }
     public ICommand SellerSelectedCommand { get; }
 
-    public BusinessesPageViewModel(SweetBoxWebApi apiService)
+    public BusinessesPageViewModel(SweetBoxWebApi apiService, IServiceProvider serviceProvider)
     {
         _apiService = apiService;
         SellersList = new ObservableCollection<Sellers>();
@@ -43,9 +44,10 @@ public class BusinessesPageViewModel : ViewModelBase
         LoadSellers();
         // אתחול הפקודה
         SellerSelectedCommand = new Command(OnSellerSelected);
+        _serviceProvider = serviceProvider;
     }
 
-    public async void LoadSellers()
+    public async Task LoadSellers()
     {
         // שליפת המוכרים מה-API או מה-DB
         var sellers = await _apiService.GetSellersAsync();
@@ -62,8 +64,19 @@ public class BusinessesPageViewModel : ViewModelBase
         var selectedSeller = selectedSellerObj as Sellers;
         if (selectedSeller != null)
         {
-            var productsPage = new BusinessProductsPage(new BusinessProductsPageViewModel(_apiService, selectedSeller.SellerId));
-            await Application.Current.MainPage.Navigation.PushAsync(productsPage);
+            // קבלת הדף וה-ViewModel מ-DI
+            var productsPage = _serviceProvider.GetRequiredService<BusinessProductsPage>();
+            var viewModel = _serviceProvider.GetRequiredService<BusinessProductsPageViewModel>();
+
+            // העברת המזהה של המוכר ל-ViewModel
+            viewModel.LoadProducts(selectedSeller.SellerId);
+
+            // הגדרת ה-BindingContext של הדף
+            productsPage.BindingContext = viewModel;
+
+            // ניווט לדף
+            await Shell.Current.Navigation.PushAsync(productsPage);
+
         }
     }
 

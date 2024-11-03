@@ -33,12 +33,15 @@ namespace SweetBoxApp
             builder.Services.AddTransient<BusinessesPageViewModel>();
             builder.Services.AddTransient<BusinessesPage>();
             //  עבור הקונה : עמוד הצגת המוצרים של המוכר
-            builder.Services.AddTransient<BusinessProductsPage>();
-            builder.Services.AddTransient<BusinessProductsPageViewModel>();
+            builder.Services.AddSingleton<BusinessProductsPage>();
+            builder.Services.AddSingleton<BusinessProductsPageViewModel>();
 
             // עבור המוכר : עמוד הצגת המוצרים של העסק שלו
             builder.Services.AddSingleton<SellerDetailsPage>();
             builder.Services.AddSingleton<SellerDetailsPageViewModel>();
+
+            builder.Services.AddSingleton<ProductDetailsPage>();
+            builder.Services.AddSingleton<ProductDetailsViewModel>();
 
 
             //הוספת השירותים לשירות DI
@@ -46,6 +49,7 @@ namespace SweetBoxApp
 
 
             //הוספת Shell של קונה ומוכר לשירות DI
+            builder.Services.AddTransient<SellerShell>();
             builder.Services.AddTransient<AppShell>();
             //builder.Services.AddSingleton<BuyerShell>();
             //builder.Services.AddSingleton<SellerShell>();

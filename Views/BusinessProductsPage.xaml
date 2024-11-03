@@ -6,8 +6,12 @@
 
     <VerticalStackLayout Padding="20">
         <Label Text="Products" FontSize="Large" HorizontalOptions="Center" />
+        <Label Text="דף משותף עבור מוכרים וקונים"  HorizontalOptions="Center" />
 
-        <CollectionView ItemsSource="{Binding ProductsList}">
+        <CollectionView ItemsSource="{Binding ProductsList}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedProduct}"
+                        SelectionChangedCommand="{Binding ProductSelectedCommand}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="10" Orientation="Horizontal" Spacing="10">
@@ -17,7 +21,7 @@
                         <!-- פרטי המוצר -->
                         <StackLayout>
                             <Label Text="{Binding ProductName}" FontSize="Medium" />
-                            <Label Text="{Binding Description}" FontSize="Small" TextColor="Gray" />
+                            <!--Label Text="{Binding Description}" FontSize="Small" TextColor="Gray" /-->
                             <Label Text="{Binding Price}" FontSize="Small" TextColor="Green" />
                         </StackLayout>
                     </StackLayout>

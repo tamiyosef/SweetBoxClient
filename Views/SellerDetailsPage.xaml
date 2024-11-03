@@ -9,6 +9,9 @@
     <ScrollView>
         <VerticalStackLayout Padding="10" Spacing="15">
 
+            <Label HorizontalOptions="Center"
+                Text="יהיה לחצן עריכה ואז ניתן יהיה לערוך את הפרטים"/>
+
             <!-- שם העסק -->
             <Label FontSize="Large" FontAttributes="Bold" Text="שם העסק" />
             <Label Text="{Binding BusinessName}"

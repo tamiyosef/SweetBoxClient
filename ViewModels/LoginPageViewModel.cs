@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using SweetBoxApp.Models;
 using SweetBoxApp.Services;
 using SweetBoxApp.Views;
@@ -25,7 +26,7 @@ public class LoginPageViewModel : ViewModelBase
     {
         get => email;
         set
-        {
+       {
             if (email != value)
             {
                 email = value;
@@ -71,19 +72,27 @@ public class LoginPageViewModel : ViewModelBase
         {
             if (user.UserType == "3")
             {
-                var businessesPage = serviceProvider.GetRequiredService<BusinessesPage>();
-                await App.Current.MainPage.Navigation.PushAsync(businessesPage);
+
+                var buyerShell = serviceProvider.GetRequiredService<AppShell>();
+                App.Current.MainPage = buyerShell;
             }
             if (user.UserType == "2")
             {
-                //Navigate to the main page
-                App.Current.MainPage = new MainPage();
+               
+                // קבלת BusinessProductsPageViewModel מ-DI
+                var viewModel = serviceProvider.GetRequiredService<BusinessProductsPageViewModel>();
+
+                // טעינת המוצרים של המוכר
+                await viewModel.LoadProducts(user.UserId);
+
+                // הגדרת ה-BindingContext של BusinessProductsPage
+                var businessProductsPage = serviceProvider.GetRequiredService<BusinessProductsPage>();
+                businessProductsPage.BindingContext = viewModel;
+                var sellerShell = serviceProvider.GetRequiredService<SellerShell>();
+                App.Current.MainPage = sellerShell;
+
             }
-            //Navigate to the main page
-            //App.Current.MainPage = new MainPage();
-            // קבלת הדף דרך ה-DI וניווט אליו
-            //var businessesPage = serviceProvider.GetRequiredService<BusinessesPage>();
-            //await App.Current.MainPage.Navigation.PushAsync(businessesPage);
+
         } 
         
         else
