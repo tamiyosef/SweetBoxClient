@@ -32,7 +32,7 @@ namespace SweetBoxApp
             // עמוד הצגת עסקים עבור קונה
             builder.Services.AddTransient<BusinessesPageViewModel>();
             builder.Services.AddTransient<BusinessesPage>();
-            //  עבור הקונה : עמוד הצגת המוצרים של המוכר
+            //   משותף עבור הקונה והמוכר : עמוד הצגת המוצרים של המוכר
             builder.Services.AddSingleton<BusinessProductsPage>();
             builder.Services.AddSingleton<BusinessProductsPageViewModel>();
 
