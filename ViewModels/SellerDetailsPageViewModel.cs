@@ -9,6 +9,7 @@ namespace SweetBoxApp.ViewModels
         private SweetBoxWebApi api_service;
 
         public int SellerId { get; private set; }
+        public ICommand SaveCommand { get; }
 
         private string businessName;
         private string businessAddress;
@@ -19,6 +20,7 @@ namespace SweetBoxApp.ViewModels
         public SellerDetailsPageViewModel(SweetBoxWebApi api_service)
         {
             this.api_service = api_service;
+            SaveCommand = new Command(async () => await SaveChangesAsync());
         }
 
         public string BusinessName
@@ -71,7 +73,7 @@ namespace SweetBoxApp.ViewModels
             }
         }
 
-        public async void Initialize(int sellerId)
+        public async Task Initialize(int sellerId)
         {
             SellerId = sellerId;
 
@@ -85,6 +87,32 @@ namespace SweetBoxApp.ViewModels
                 BusinessPhone = seller.BusinessPhone;
                 Description = seller.Description;
                 ProfilePicture = seller.ProfilePicture;
+            }
+        }
+
+        private async Task SaveChangesAsync()
+        {
+            // יצירת אובייקט עם הפרטים המעודכנים
+            var updatedSeller = new Sellers
+            {
+                SellerId = SellerId,
+                BusinessName = BusinessName,
+                BusinessAddress = BusinessAddress,
+                BusinessPhone = BusinessPhone,
+                Description = Description,
+                ProfilePicture = ProfilePicture
+            };
+
+            // קריאה ל-API לשמירת השינויים
+            bool success = await api_service.UpdateSellerAsync(updatedSeller);
+
+            if (success)
+            {
+                // טיפול במצב של שמירה מוצלחת (לדוגמה, הצגת הודעת הצלחה)
+            }
+            else
+            {
+                // טיפול במצב של כשל בשמירה (לדוגמה, הצגת הודעת שגיאה)
             }
         }
     }

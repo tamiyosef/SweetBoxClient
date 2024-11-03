@@ -89,7 +89,16 @@ public class LoginPageViewModel : ViewModelBase
                 var businessProductsPage = serviceProvider.GetRequiredService<BusinessProductsPage>();
                 businessProductsPage.BindingContext = viewModel;
                 var sellerShell = serviceProvider.GetRequiredService<SellerShell>();
+
                 App.Current.MainPage = sellerShell;
+
+                // קבלת SellerDetailsPageViewModel מ-DI והגדרת הנתונים
+                var sellerDetailsViewModel = serviceProvider.GetRequiredService<SellerDetailsPageViewModel>();
+                await sellerDetailsViewModel.Initialize(user.UserId);
+
+                // הגדרת BindingContext עבור SellerDetailsPage
+                var sellerDetailsPage = serviceProvider.GetRequiredService<SellerDetailsPage>();
+                sellerDetailsPage.BindingContext = sellerDetailsViewModel;
 
             }
 

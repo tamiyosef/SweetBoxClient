@@ -14,30 +14,31 @@
 
             <!-- שם העסק -->
             <Label FontSize="Large" FontAttributes="Bold" Text="שם העסק" />
-            <Label Text="{Binding BusinessName}"
-                FontSize="Medium"/>
-           
+            <Entry Text="{Binding BusinessName}" FontSize="Medium" />
 
             <!-- כתובת העסק -->
             <Label FontSize="Large" FontAttributes="Bold" Text="כתובת העסק" />
-            <Label Text="{Binding BusinessAddress}"
+            <Entry Text="{Binding BusinessAddress}"
                 FontSize="Medium"/> 
 
             <!-- טלפון העסק -->
             <Label FontSize="Large" FontAttributes="Bold" Text="טלפון העסק" />
-            <Label Text="{Binding BusinessPhone}"
+            <Entry Text="{Binding BusinessPhone}"
                 FontSize="Medium" />
                   
 
             <!-- תיאור העסק -->
             <Label FontSize="Large" FontAttributes="Bold" Text="תיאור העסק" />
-            <Label Text="{Binding Description}"
+            <Entry Text="{Binding Description}"
                 FontSize="Medium"/> 
 
             <!-- תמונת פרופיל -->
             <Label FontSize="Large" FontAttributes="Bold" Text="תמונת פרופיל" />
             <Image Source="{Binding ProfilePicture}" WidthRequest="100" HeightRequest="100" />
-              
+
+            <!-- כפתור שמירה -->
+            <Button Text="שמור שינויים" Command="{Binding SaveCommand}" />
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

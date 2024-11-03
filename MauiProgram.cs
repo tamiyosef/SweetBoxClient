@@ -43,16 +43,15 @@ namespace SweetBoxApp
             builder.Services.AddSingleton<ProductDetailsPage>();
             builder.Services.AddSingleton<ProductDetailsViewModel>();
 
-
+            builder.Services.AddSingleton<SellerDetailsPage>();
+            builder.Services.AddSingleton<SellerDetailsPageViewModel>();
             //הוספת השירותים לשירות DI
             builder.Services.AddSingleton<SweetBoxWebApi>();
-
 
             //הוספת Shell של קונה ומוכר לשירות DI
             builder.Services.AddTransient<SellerShell>();
             builder.Services.AddTransient<AppShell>();
-            //builder.Services.AddSingleton<BuyerShell>();
-            //builder.Services.AddSingleton<SellerShell>();
+
 
 #if DEBUG
             builder.Logging.AddDebug();

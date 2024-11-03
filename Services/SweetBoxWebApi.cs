@@ -241,6 +241,31 @@ namespace SweetBoxApp.Services
             return null;
         
         }
+        public async Task<bool> UpdateSellerAsync(Sellers updatedSeller)
+        {
+            // יצירת URL לעדכון פרטי המוכר לפי ה-ID
+            string url = $"{this.baseUrl}sellers/{updatedSeller.SellerId}";
+
+            try
+            {
+                // המרת אובייקט ה-Seller ל-JSON כדי לשלוח אותו ל-API
+                string json = JsonSerializer.Serialize(updatedSeller, jsonSerializerOptions);
+
+                // יצירת התוכן לבקשת ה-PUT עם הקידוד וסוג התוכן המתאימים
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                // שליחת בקשת PUT ל-API עם הנתונים המעודכנים
+                HttpResponseMessage response = await client.PutAsync(url, content);
+
+                // בדיקה אם הבקשה הצליחה (סטטוס HTTP 200)
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                // טיפול בשגיאות (ניתן להוסיף לוג או הודעת שגיאה למשתמש)
+                return false;
+            }
+        }
 
     }
 
