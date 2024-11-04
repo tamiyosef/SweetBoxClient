@@ -74,14 +74,7 @@ namespace SweetBoxApp.Services
                     //Extract the content as string
                     string resContent = await response.Content.ReadAsStringAsync();
 
-                    //Desrialize result
-                    JsonSerializerOptions options = new JsonSerializerOptions
-                    {
-                        // Ensure case-insensitive matching of property names
-                        PropertyNameCaseInsensitive = true
-                    };
-
-                    User result = JsonSerializer.Deserialize<User>(resContent, options);
+                    User result = JsonSerializer.Deserialize<User>(resContent, jsonSerializerOptions);
 
                     // Store the logged-in user details for further use
                     this.LoggedInUser = result;
