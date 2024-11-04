@@ -70,6 +70,7 @@ public class LoginPageViewModel : ViewModelBase
         User user = await service.Login(info);
         if (user != null)
         {
+            // בדיקה האם המתשתמש הוא קונה
             if (user.UserType == "3")
             {
 
@@ -87,6 +88,7 @@ public class LoginPageViewModel : ViewModelBase
 
 
             }
+            // בדיקה האם המתשתמש הוא מוכר
             if (user.UserType == "2")
             {
                

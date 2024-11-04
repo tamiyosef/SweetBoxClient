@@ -28,8 +28,10 @@ namespace SweetBoxApp.Services
 
         // אובייקט של מחלקת השירות שמכיל את כתובת הבסיס לשרת
         private string baseUrl;
+
+
         //מאפיין זה מחזיק את פרטי המשתמש לאחר התחברות מוצלחת.
-        //ניתן להשתמש בו בכל האפליקציה לצורך בדיקה או שליפה של מידע על המשתמש המחובר
+        //ניתן להשתמש בו לצורך בדיקה או שליפה של מידע על המשתמש המחובר
         public User LoggedInUser { get; set; }
 
 
@@ -74,14 +76,7 @@ namespace SweetBoxApp.Services
                     //Extract the content as string
                     string resContent = await response.Content.ReadAsStringAsync();
 
-                    //Desrialize result
-                    JsonSerializerOptions options = new JsonSerializerOptions
-                    {
-                        // Ensure case-insensitive matching of property names
-                        PropertyNameCaseInsensitive = true
-                    };
-
-                    User result = JsonSerializer.Deserialize<User>(resContent, options);
+                    User result = JsonSerializer.Deserialize<User>(resContent, jsonSerializerOptions);
 
                     // Store the logged-in user details for further use
                     this.LoggedInUser = result;
