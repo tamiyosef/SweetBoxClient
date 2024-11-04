@@ -19,6 +19,13 @@
             Route="SellerDetailsPage" />
     </FlyoutItem>
 
+    <FlyoutItem Title="סיכום הזמנות" >
+        <ShellContent 
+            Title="הפרטים" 
+            ContentTemplate="{DataTemplate local:SellerOrdersSummary}" 
+            Route="SellerOrdersSummary" />
+    </FlyoutItem>
+
 
     <MenuItem IconImageSource="dotnet_bot.png" Text="Logout" />
     <!-- בהמשך - להוסיף 

@@ -27,14 +27,16 @@
         </Tab>
     </TabBar>
 
-    <!-- הגדרת "UserDetailsPage" ב-Shell כדי לאפשר ניווט -->
-    <ShellContent
+
+    <FlyoutItem Title="My Details">
+        <ShellContent
         Title="My Details"
         ContentTemplate="{DataTemplate local:UserDetailsPage}"
         Route="UserDetailsPage" />
+    </FlyoutItem>
 
 
-  
+
     <MenuItem IconImageSource="dotnet_bot.png" Text="Logout" />
     <!--
         בהמשך - להוסיף

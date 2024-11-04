@@ -267,6 +267,32 @@ namespace SweetBoxApp.Services
             }
         }
 
+        public async Task<bool> UpdateUserDetailsAsync(User updatedUser)
+        {
+            string url = $"{this.baseUrl}UpdateUserDetails";
+
+            try
+            {
+                // Serialize the updated user details into JSON
+                string json = JsonSerializer.Serialize(updatedUser);
+
+                // Create the content for the PUT request
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                // Send a PUT request to the server API
+                HttpResponseMessage response = await client.PutAsync(url, content);
+
+                // Check if the request was successful
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors
+                return false;
+            }
+        }
+
+
     }
 
 } 

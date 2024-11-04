@@ -18,15 +18,24 @@ public class LoginPageViewModel : ViewModelBase
 
     public SweetBoxWebApi service;
     private readonly IServiceProvider serviceProvider;
-
     public ICommand LoginCommand { get; set; }
     public ICommand GoToRegisterCommand { get; set; }
     private string email;
+    private string password;
+
+    public LoginPageViewModel(SweetBoxWebApi service, IServiceProvider serviceProvider)
+	{
+        this.service = service;
+        this.serviceProvider = serviceProvider;
+        this.LoginCommand = new Command(OnLogin);
+        this.GoToRegisterCommand = new Command(OnRegisterClicked);
+    }
+
     public string Email
     {
         get => email;
         set
-       {
+        {
             if (email != value)
             {
                 email = value;
@@ -36,7 +45,7 @@ public class LoginPageViewModel : ViewModelBase
             }
         }
     }
-    private string password;
+
     public string Password
     {
         get => password;
@@ -51,15 +60,6 @@ public class LoginPageViewModel : ViewModelBase
             }
         }
     }
-
-    public LoginPageViewModel(SweetBoxWebApi service, IServiceProvider serviceProvider)
-	{
-        this.service = service;
-        this.serviceProvider = serviceProvider;
-        this.LoginCommand = new Command(OnLogin);
-        this.GoToRegisterCommand = new Command(OnRegisterClicked);
-    }
-
     public async void OnLogin()
     {
         LoginInfo info = new LoginInfo
@@ -75,6 +75,17 @@ public class LoginPageViewModel : ViewModelBase
 
                 var buyerShell = serviceProvider.GetRequiredService<AppShell>();
                 App.Current.MainPage = buyerShell;
+
+                // קבלת UserDetailsPageViewModel מה-DI והגדרת הנתונים
+                var userDetailsViewModel = serviceProvider.GetRequiredService<UserDetailsPageViewModel>();
+                userDetailsViewModel.Initialize(user); // אתחול פרטי המשתמש
+
+                // הגדרת BindingContext עבור UserDetailsPage
+                var userDetailsPage = serviceProvider.GetRequiredService<UserDetailsPage>();
+                userDetailsPage.BindingContext = userDetailsViewModel;
+
+
+
             }
             if (user.UserType == "2")
             {

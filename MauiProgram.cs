@@ -26,25 +26,35 @@ namespace SweetBoxApp
             // עמוד הרשמה כללי
             builder.Services.AddSingleton<RegistrationPage>();
             builder.Services.AddSingleton<RegistrationPageViewModel>();
+
+
+            // עבור קונה
+            // עמוד הצגת עסקים
+            builder.Services.AddTransient<BusinessesPageViewModel>();
+            builder.Services.AddTransient<BusinessesPage>();
+            // משותף עבור הקונה והמוכר : עמוד הצגת המוצרים של מוכר
+            builder.Services.AddSingleton<BusinessProductsPage>();
+            builder.Services.AddSingleton<BusinessProductsPageViewModel>();
+            // עמוד הצגת פרטים אישיים עבור קונה
+            builder.Services.AddSingleton<UserDetailsPage>();
+            builder.Services.AddSingleton<UserDetailsPageViewModel>();
+
+            // עבור מוכר :
             // עמוד המשך הרשמה עבור מוכר
             builder.Services.AddTransient<SellerRegistrationPage>();
             builder.Services.AddTransient<SellerRegistrationPageViewModel>();
-            // עמוד הצגת עסקים עבור קונה
-            builder.Services.AddTransient<BusinessesPageViewModel>();
-            builder.Services.AddTransient<BusinessesPage>();
-            //   משותף עבור הקונה והמוכר : עמוד הצגת המוצרים של המוכר
-            builder.Services.AddSingleton<BusinessProductsPage>();
-            builder.Services.AddSingleton<BusinessProductsPageViewModel>();
-
-            // עבור המוכר : עמוד הצגת המוצרים של העסק שלו
+            // עמוד הצגת המוצרים של העסק שלו
             builder.Services.AddSingleton<SellerDetailsPage>();
             builder.Services.AddSingleton<SellerDetailsPageViewModel>();
-
+            // עמוד פרטי המוצר
             builder.Services.AddSingleton<ProductDetailsPage>();
             builder.Services.AddSingleton<ProductDetailsViewModel>();
-
+            // עמוד פרטי העסק
             builder.Services.AddSingleton<SellerDetailsPage>();
             builder.Services.AddSingleton<SellerDetailsPageViewModel>();
+
+
+
             //הוספת השירותים לשירות DI
             builder.Services.AddSingleton<SweetBoxWebApi>();
 

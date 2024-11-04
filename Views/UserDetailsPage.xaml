@@ -5,10 +5,29 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="UserDetailsPage">
     <VerticalStackLayout>
-       
-        <Label
-            HorizontalOptions="Center"
-            Text="כאן יוצגו פרטי המשתמש שמחובר"
-            VerticalOptions="Center" />
+        
+
+        <ScrollView>
+            <VerticalStackLayout Padding="10" Spacing="15">
+
+                <Label HorizontalOptions="Center"
+                   Text="ערוך את פרטי המשתמש ולאחר מכן לחץ על שמור" />
+
+                <!-- שם מלא -->
+                <Label FontSize="Large" FontAttributes="Bold" Text="שם מלא" />
+                <Entry Text="{Binding FullName}" FontSize="Medium" />
+
+                <!-- אימייל -->
+                <Label FontSize="Large" FontAttributes="Bold" Text="אימייל" />
+                <Entry Text="{Binding Email}" FontSize="Medium" />
+
+                <!-- הודעת שגיאה -->
+                <Label Text="{Binding ErrorMessage}" TextColor="Red" />
+
+                <!-- כפתור שמירה -->
+                <Button Text="שמור" Command="{Binding SaveCommand}" />
+
+            </VerticalStackLayout>
+        </ScrollView>
     </VerticalStackLayout>
 </ContentPage>
