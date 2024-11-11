@@ -17,8 +17,6 @@ namespace SweetBoxApp.ViewModels
         public ICommand ProductSelectedCommand { get; }
         private Products _selectedProduct;
 
-
-        // בעת טעינת העמוד, העמוד יקבל את המס' המזהה של המוכר כדי שיוכל לטעון את המוצרים הזמינים שלו 
         public BusinessProductsPageViewModel(IServiceProvider serviceProvider,SweetBoxWebApi apiService)
         {
             _apiService = apiService;
@@ -45,7 +43,9 @@ namespace SweetBoxApp.ViewModels
         }
 
         public async Task LoadProducts(int sellerId)
+
         {
+            ProductsList.Clear(); // אפס את הרשימה לפני הטעינה החדשה
             var products = await _apiService.GetProductsBySellerIdAsync(sellerId);
 
             foreach (var product in products)

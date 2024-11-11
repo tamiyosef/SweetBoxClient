@@ -108,11 +108,11 @@ namespace SweetBoxApp.ViewModels
 
             if (success)
             {
-                // טיפול במצב של שמירה מוצלחת (לדוגמה, הצגת הודעת הצלחה)
+                await Application.Current.MainPage.DisplayAlert("Update", "Update Succeced", "ok");
             }
             else
             {
-                // טיפול במצב של כשל בשמירה (לדוגמה, הצגת הודעת שגיאה)
+                await Application.Current.MainPage.DisplayAlert("Update", "Update failed", "ok");
             }
         }
     }

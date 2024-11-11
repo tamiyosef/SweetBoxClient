@@ -23,8 +23,8 @@ namespace SweetBoxApp.Services
         private JsonSerializerOptions jsonSerializerOptions;
 
         // כתובת הבסיס לכתובת השרת מותאמת לפי פלטפורמות ההרצה
-        public static string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://88qq7z7g-5021.uks1.devtunnels.ms/api/" : "http://localhost:5021/api/";
-        public static string ImageUrl = DeviceInfo.Platform == DevicePlatform.Android ? "https://88qq7z7g-5021.uks1.devtunnels.ms/images/" : "http://localhost:5021/images/";
+        public static string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://59zm7fqh-5021.uks1.devtunnels.ms/api/" : "http://localhost:5021/api/";
+        public static string ImageUrl = DeviceInfo.Platform == DevicePlatform.Android ? "https://59zm7fqh-5021.uks1.devtunnels.ms/images/" : "http://localhost:5021/images/";
 
         // אובייקט של מחלקת השירות שמכיל את כתובת הבסיס לשרת
         private string baseUrl;
@@ -239,7 +239,7 @@ namespace SweetBoxApp.Services
         public async Task<bool> UpdateSellerAsync(Sellers updatedSeller)
         {
             // יצירת URL לעדכון פרטי המוכר לפי ה-ID
-            string url = $"{this.baseUrl}sellers/{updatedSeller.SellerId}";
+            string url = $"{this.baseUrl}UpdateSeller/{updatedSeller.SellerId}";
 
             try
             {

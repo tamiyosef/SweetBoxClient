@@ -9,6 +9,7 @@ public partial class UserDetailsPage : ContentPage
 		InitializeComponent();
         BindingContext = vm;
 
+        // הוספה של כפתור חזור לדף הקודם 
         var backButton = new ToolbarItem
         {
             Text = "חזור"
